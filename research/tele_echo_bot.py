@@ -1,48 +1,34 @@
-import logging 
-from aiogram import Bot , Dispatcher,executor , types 
+import logging
+from aiogram import Bot, Dispatcher, executor, types
 from dotenv import load_dotenv
-import os 
-
+import os
 
 load_dotenv()
-API_TOKEN=os.getenv("TOKEN")
+API_TOKEN = os.getenv("TOKEN")
 # print(API_TOKEN)
-
-
-
 
 #configure logging
 logging.basicConfig(level=logging.INFO)
 
-#initialize bot and sispatcher 
-bot =Bot(token=API_TOKEN)
-dp =Dispatcher(bot)
+# Initialize bot and dispatcher
+bot = Bot(token=API_TOKEN)
+dp = Dispatcher(bot)
 
 
-
-@dp.message_handler(commands=['start','help'])
+@dp.message_handler(commands=['start', 'help'])
 async def command_start_handler(message: types.Message):
     """
-    This handler receives messages with `/start` or `/help` command
+    This handler receives messages with `/start` or  `/help `command
     """
-    
-    await message.reply("Hi\nI am Echo bot !\nPower by aiogram !")
-
-
+    await message.reply("Hi\nI am Echo Bot!\nPowered by aiogram.")
 
 
 @dp.message_handler()
-async def echo (message: types.Message):
+async def echo(message: types.Message):
     """
-    This will return echo 
+    This will retrun echo
     """
-    
     await message.answer(message.text)
 
-
-
-
-
-
 if __name__ == "__main__":
-    executor.start_polling(dp,skip_updates=True)
+    executor.start_polling(dp, skip_updates=True)
