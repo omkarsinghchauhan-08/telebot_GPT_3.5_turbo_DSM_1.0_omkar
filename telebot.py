@@ -1,63 +1,58 @@
 from dotenv import load_dotenv
-import os 
-from aiogram import Bot , Dispatcher,executor , types 
-import openai 
-import sys 
-
+import os
+from aiogram import Bot, Dispatcher, executor, types
+import openai
+import sys
 
 
 class Reference:
-    ''' 
-    A class to store previously response from the chatGPT API 
-    
     '''
-
+    A class to store previously response from the chatGPT API
+    '''
 
     def __init__(self) -> None:
         self.response = ""
 
 
-
 load_dotenv()
-openai.api_key=os.getenv("OpenAI_API_KEY")
+openai.api_key = os.getenv("OpenAI_API_KEY")  
 
-reference=Reference()
+reference = Reference()
 
+TOKEN = os.getenv("TOKEN")
 
-TOKEN =os.getenv("TOKEN")
-
-#model name 
-
-MODEL_NAME="gpt-3.5-turbo"
+#model name
+MODEL_NAME = "gpt-3.5-turbo"
 
 
-#initialize bot and sispatcher 
-bot =Bot(token=TOKEN)
-dispatcher =Dispatcher(bot)
+# Initialize bot and dispatcher
+bot = Bot(token=TOKEN)
+dispatcher = Dispatcher(bot)
+
 
 def clear_past():
-    """
-    A Function to clear the previous conversation and context
+    """A function to clear the previous conversation and context.
     """
     reference.response = ""
+
+
 
 @dispatcher.message_handler(commands=['start'])
 async def welcome(message: types.Message):
     """
-    This handler receives messages with `/start` or `/help` command
+    This handler receives messages with `/start` or  `/help `command
     """
-    
-    await message.reply("Hi\nI am TeleBot !\nCreated by Omkar Singh Chauhan\nHow may I assist you ? !")
+    await message.reply("Hi\nI am Tele Bot!\Created by Bappy. How can i assist you?")
+
 
 
 @dispatcher.message_handler(commands=['clear'])
-async def clear(message:types.Message):
+async def clear(message: types.Message):
     """
     A handler to clear the previous conversation and context.
-
     """
     clear_past()
-    await message.reply("I've cleared the past conversationand context.")
+    await message.reply("I've cleared the past conversation and context.")
 
 
 
@@ -96,7 +91,5 @@ async def chatgpt(message: types.Message):
 
 
 
-    
 if __name__ == "__main__":
-    executor.start_polling(dispatcher,skip_updates=True)
-
+    executor.start_polling(dispatcher, skip_updates=False)
