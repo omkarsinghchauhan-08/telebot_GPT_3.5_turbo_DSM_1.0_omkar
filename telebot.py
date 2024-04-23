@@ -84,7 +84,7 @@ async def chatgpt(message: types.Message):
     """
     print(f">>> USER: \n\t{message.text}")
     response = openai.ChatCompletion.create(
-        model = "gpt-3.5-turbo",
+        model = MODEL_NAME,
         messages = [
             {"role": "assistant", "content": reference.response}, # role assistant
             {"role": "user", "content": message.text} #our query 
