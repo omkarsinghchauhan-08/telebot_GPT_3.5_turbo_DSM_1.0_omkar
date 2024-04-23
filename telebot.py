@@ -10,7 +10,7 @@ class Reference:
     A class to store previously response from the chatGPT API
     '''
 
-    def __init__(self):
+    def __init__(self)  -> None:
         self.response = ""
 
 
